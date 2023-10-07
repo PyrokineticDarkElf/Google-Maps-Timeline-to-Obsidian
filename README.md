@@ -98,4 +98,7 @@ If you've enabled output_place_visits, the Markdown files will include sections 
 - This script provides a starting point for converting Google Location History data into Markdown files. You can further customize it to suit your specific needs or integrate it into your note-taking workflow.
 - Please note that the script processes data based on your configuration settings. Ensure that you have configured the script to include the information you need in your Markdown files.
 
-Happy note-taking with your Google Location History data in Obsidian or your preferred note-taking application!
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+Author Staples1010
