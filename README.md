@@ -9,7 +9,8 @@ Before you begin, ensure you have the following:
 
 ## Setup
 - Clone or download this repository to your computer.
-- Copy your "Semantic Location History" folder to the "input" folder.
+- Create an input folder named "input".
+- Copy your "Semantic Location History" folder from your Google Takeout to the "input" folder.
 
 ```
 - Google Timeline to Obsidian
