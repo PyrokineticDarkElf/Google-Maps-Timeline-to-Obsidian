@@ -20,10 +20,16 @@
   "output_place_semanticType": true,
   "output_place_place_id": true,
 
-  
+
+  "output_frontmatter_toggle": true,
+  "output_frontmatter": {
+    "title": "%Y-%m-%d-%A",
+    "tags": "LocationHistory"
+  },
+
+
   "input_folder": "./input",
 
-  
   "output_folder_structure": {
     "output_folder": "./output",
     "main_folder_name": "Location History",
@@ -31,7 +37,6 @@
     "month_format": "%m-%B",
     "day_format": "%Y-%m-%d-%A"
   },
-  
-  
+
   "iframe_base_url": "https://maps.google.com/maps?q={loc_lat},{loc_long}&hl=es;z=14&amp;output=embed"
 }
