@@ -1,4 +1,4 @@
-# Google Timeline to Obsidian Converter
+# Google Maps Timeline to Obsidian Converter
 This Python script, timelineToObsidian.py, is designed to convert your Google Location History data into Markdown files suitable for use in Obsidian or other note-taking applications.
 It creates separate Markdown files for each day's location history, providing a structured and readable format. Here's how to use and understand the script:
 
