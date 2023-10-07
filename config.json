@@ -1,0 +1,37 @@
+{
+  "output_activity_segments": true,
+
+  "output_activity_activityType": true,
+  "output_activity_formatted_duration": true,
+  "output_activity_start_time_24_hour": true,
+  "output_activity_start_iframe": true,
+  "output_activity_end_time_24_hour": true,
+  "output_activity_end_iframe": true,
+
+
+  "output_place_visits": true,
+
+  "output_place_location": true,
+  "output_place_formatted_duration": true,
+  "output_place_iframe": true,
+  "output_place_start_time_24_hour": true,
+  "output_place_end_time_24_hour": true,
+  "output_place_address": true,
+  "output_place_semanticType": true,
+  "output_place_place_id": true,
+
+  
+  "input_folder": "./input",
+
+  
+  "output_folder_structure": {
+    "output_folder": "./output",
+    "main_folder_name": "Location History",
+    "year_format": "%Y",
+    "month_format": "%m-%B",
+    "day_format": "%Y-%m-%d-%A"
+  },
+  
+  
+  "iframe_base_url": "https://maps.google.com/maps?q={loc_lat},{loc_long}&hl=es;z=14&amp;output=embed"
+}
