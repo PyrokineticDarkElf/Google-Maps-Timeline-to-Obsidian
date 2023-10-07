@@ -54,6 +54,35 @@ def convert_to_24_hour_format(timestamp_str):
 def create_temporary_directory():
     return tempfile.TemporaryDirectory(prefix="location_history_temp")
 
+# Function to generate frontmatter
+def generate_frontmatter(config, dir_name):
+    if not config["output_frontmatter_toggle"]:
+        return ""  # If frontmatter toggle is false, return an empty string
+
+    frontmatter = "---\n"
+    
+    for key, value in config["output_frontmatter"].items():
+        # If the key is "title," generate the title in the specified format using the dir_name
+        if key == "title":
+            # Convert the file name to a datetime object
+            try:
+                date_obj = datetime.strptime(dir_name.split('.')[0], '%Y-%m-%d')
+                title_value = date_obj.strftime(config["output_frontmatter"]["title"]) # Use title to define title format
+                frontmatter += f"{key}: {title_value}\n"
+            except ValueError:
+                # Skip directories that do not match the expected date format
+                continue
+
+        # If the key is "tags," generate the tags in the specified format
+        if key == "tags":
+            frontmatter += f"{key}:\n"
+            for tag in value.split(","):
+                frontmatter += f"  - {tag.strip()}\n"
+
+    frontmatter += "---\n"
+
+    return frontmatter
+
 # Function to generate a Markdown table from a list of rows
 def generate_markdown_table(h1, h2, b1, b2):
     # Create the header row
@@ -130,7 +159,7 @@ def merge_json_data(temp_folder, output_folder, iframe_base_url, main_folder_nam
             day_files = [f for f in os.listdir(day_folder) if f.endswith('.json')]
             day_files.sort() # Sort files by name (which contains timestamps)
 
-            markdown_content = ""
+            markdown_content = generate_frontmatter(config, dir_name)
 
             for day_file in day_files:
                 with open(os.path.join(day_folder, day_file), 'r', encoding='utf-8') as json_file:
@@ -339,24 +368,30 @@ def merge_json_data(temp_folder, output_folder, iframe_base_url, main_folder_nam
 
                         markdown_content += '\n'
 
-            # Write the merged content to a Markdown file
-            if markdown_content:
-                # Convert the file name to a datetime object
-                date_obj = datetime.strptime(dir_name.split('.')[0], '%Y-%m-%d')
 
-                year = date_obj.strftime(year_format) # Use year_format to define year folder name
-                month = date_obj.strftime(month_format) # Use month_format to define month folder name
-                day = date_obj.strftime(day_format) # Use day_format to define day folder name
+                # Write the merged content to a Markdown file
+                if markdown_content:
+                    # Convert the file name to a datetime object
+                    try:
+                        date_obj = datetime.strptime(dir_name.split('.')[0], '%Y-%m-%d')
+                    except ValueError:
+                        # Skip directories that do not match the expected date format
+                        continue
 
-                # Create the subdirectories if they don't exist
-                subfolder = os.path.join(output_folder, main_folder_name, year, month)
-                os.makedirs(subfolder, exist_ok=True)
+                    year = date_obj.strftime(year_format) # Use year_format to define year folder name
+                    month = date_obj.strftime(month_format) # Use month_format to define month folder name
+                    day = date_obj.strftime(day_format) # Use day_format to define day folder name
 
-                # Construct the full output file path
-                output_file_path = os.path.join(subfolder, day + ".md")
-                
-                with open(output_file_path, 'w', encoding='utf-8') as markdown_file:
-                    markdown_file.write(markdown_content)
+                    # Create the subdirectories if they don't exist
+                    subfolder = os.path.join(output_folder, main_folder_name, year, month)
+                    os.makedirs(subfolder, exist_ok=True)
+
+                    # Construct the full output file path
+                    output_file_path = os.path.join(subfolder, day + ".md")
+                    
+                    with open(output_file_path, 'w', encoding='utf-8') as markdown_file:
+                        markdown_file.write(markdown_content)
+
 
 # Main function
 def main():
