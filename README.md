@@ -55,6 +55,11 @@ In the config.json file, you can customize the script's behavior by adjusting th
 `input_folder`: Specify the path to the folder containing your "Semantic Location History" folder. The default is `./input`
 `iframe_base_url`: The base URL for generating iframes for location maps. You can use this to customize the map provider and styling. You may also be able to use the variables `loc_lat` and `loc_long` with another map provider.
 
+### Frontmatter for Obsidian
+`output_frontmatter_toggle`: If set to true, adds the below frontmatter to the markdown files
+- `title`: A Python strftime format string for the day folder (e.g., "%Y-%m-%d-%A" for the date in year-month-day-day_of_week format).
+- `tags`: A comma seperated list of tags (e.g. "LocationHistory,GoogleTakeout").
+
 ## Running the Script
 After configuring the config.json file, run the script using the following command:
 
